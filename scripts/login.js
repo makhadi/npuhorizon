@@ -31,7 +31,7 @@ $(function() {
                         sessionStorage.setItem("username", obj.u);
                         
                         var test = sessionStorage.getItem("username");
-                        alert(test);
+                        //alert(test);
                         //sessionStorage.setItem("username", "");
 		        //$(tblRow).appendTo("#profile"); 
 		     //});

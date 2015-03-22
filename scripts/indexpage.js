@@ -115,11 +115,13 @@ $(document).ready(function() {
         $("#Contact").hide();
     });
     $("#c").click(function() {
+        //var prfidglobal = sessionStorage.getItem("profid");
         $("#home").hide();
         $("#profile").hide();
         $("#rating").show();
         $("#forum").hide();
         $("#Contact").hide();
+        //getProfileChart(prfidglobal);
     });
     $("#d").click(function() {
         $("#home").hide();

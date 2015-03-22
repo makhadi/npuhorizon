@@ -4,11 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Applications/XAMPP/xamppfiles/htdocs/NPUHorizon/scripts/login.js</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/NPUHorizon/phpfiles/profilepagechart.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/NPUHorizon/phpfiles/userlogin.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/NPUHorizon/scripts/savepost.js</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/NPUHorizon/scripts/profilepagechart.js</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/NPUHorizon/scripts/jquery-1.4.2.min.js</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/NPUHorizon/scripts/importprof.js</file>
             <file>file:/Applications/XAMPP/xamppfiles/htdocs/NPUHorizon/index.html</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/NPUHorizon/scripts/indexpage.js</file>
         </group>
     </open-files>
 </project-private>

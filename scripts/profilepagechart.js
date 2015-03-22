@@ -10,20 +10,21 @@
             var latest_semesters = [];
             var total_samples = 0;
             var course_num = 0;
-			var prfidglobal = 0;				
+			var prfidglobal = sessionStorage.getItem("profid");				
 			var downloaded_latest_scores = [];
 			var downloaded_latest_semesters = [];
 			var usernamedb = 0;
 			var studentID = 0;
 			var course_id = 0;
             	function getProfileChart(){
+                    alert("prof id: "+prfidglobal);
             	 $.ajax({ 
             	 
             	 		type: "GET",
 			               
 			               url: "http://localhost:8888/phpfiles/profilepagechart.php",
 			                
-			                data: 'prof_id=' + 1,
+			                data: 'prof_id=' + prfidglobal,
 			                success: function(data)
 			                {
 			                	
