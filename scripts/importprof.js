@@ -4,23 +4,61 @@
  * and open the template in the editor.
  */
 
+/*
+ $(document).ready(function() {
+ var people = [];
+ //alert("hiii");
+ //$.getJSON('http://localhost:8888/phpfiles/backup_homepageprofdata.php', function(data){
+ $.getJSON('http://192.168.0.25/backup_homepageprofdata.php', function(data) {
+ $.each(data, function(i, f) {
+ var tblRow = "<p class='rating_profile_left'>" + "<img class='img-radius'"
+ + "src='" + "data:image/jpg;base64,"
+ + f.image + "'/>" + "</p><br>" +
+ //+ f.image + "'/>" + "</td>" +
+ //"<td> <A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> </td>" + "<td>" + f.department + "</td>" + "<td> <a href='mailto:" + f.email + "'>" + f.email + "</a></td>" + "</tr>"
+ " <p class='rating_profile_right'> <A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</p>"
+
+ // $(tblRow).appendTo("#profile"); profile_prof
+ $(tblRow).appendTo("#profile_prof");
+ });
+ });
+
+ }); */
 
 $(document).ready(function() {
+
+    /******************Starting of code : Code for new slider*****************/
+    $(function() {
+        $('#js-news').ticker({
+            speed: 0.10,
+            htmlFeed: false,
+            fadeInSpeed: 600,
+            titleText: 'Latest News'
+        });
+    });
+    /******************End of code : Code for new slider*****************/
     var people = [];
     //alert("hiii");
-    $.getJSON('http://localhost:8888/phpfiles/backup_homepageprofdata.php', function(data){
-    //$.getJSON('http://192.168.0.34/backup_homepageprofdata.php', function(data) {
+    //$.getJSON('http://localhost:8888/phpfiles/backup_homepageprofdata.php', function(data){
+    $.getJSON('http://localhost:8888/phpfiles/backup_homepageprofdata.php', function(data) {
         $.each(data, function(i, f) {
-            var tblRow = "<tr>" + "<td>" + "<img "
-                    + "src='" + "data:image/jpg;base64,"
-                    + f.image + "'/>" + "</td>" +
-                    "<td> <A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> </td>" + "<td>" + f.department + "</td>" + "<td> <a href='mailto:" + f.email + "'>" + f.email + "</a></td>" + "</tr>"
+            /*  var tblRow = "<div class='rating_profile_left'>" + "<img class='img-radius'"
+             + "src='" + "data:image/jpg;base64,"
+             + f.image + "'/>" + "</div>" +
+             //+ f.image + "'/>" + "</td>" +
+             //"<td> <A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> </td>" + "<td>" + f.department + "</td>" + "<td> <a href='mailto:" + f.email + "'>" + f.email + "</a></td>" + "</tr>"
+             " <div class='rating_profile_right'> <A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</div><br><br>"
 
-            $(tblRow).appendTo("#profile");
+             // $(tblRow).appendTo("#profile"); profile_prof */
+            var pdata = "<div class='right_name_prof'><tr><td><A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</div>";
+            var pimg = "<table class='left_prof_img'><tr><td><img class='img-radius'"
+                + "src='" + "data:image/jpg;base64,"
+                + f.image + "'/></td></tr></table>";
+            // $(tblRow).appendTo("#profile_prof");
+            $(pdata).appendTo("#profile_prof");
+            $(pimg).appendTo("#profile_prof");
         });
-
     });
-
 });
 var maxNumOfStars = 5;
 var latest_scores = [];
@@ -34,6 +72,7 @@ var usernamedb = 0;
 var studentID = 0;
 var course_id = 0;
 var tablecontents = "";
+var professor_ID = "";
 function  getchartdata(profid) {
     document.getElementById("professor_chart").innerHTML = "";
     $.ajax({
@@ -42,13 +81,11 @@ function  getchartdata(profid) {
         data: 'prof_id=' + profid,
         success: function(data)
         {
-            alert("from json" + data.profname);
+            // alert("from json" + data.profname);
             var tmp = data.substring(1, data.length - 1);
             //alert(tmp);
             var tmp2 = tmp.replace(/},{/g, '} DELIMIT {');
-
             var tmp3 = tmp2.split(" DELIMIT ");
-
             for (var i in tmp3) {
                 // alert(tmp3[i]);
 
@@ -59,7 +96,6 @@ function  getchartdata(profid) {
 
                 downloaded_latest_semesters.push(obj.ratyear);
                 downloaded_latest_scores.push(obj.teaching);
-
                 //
             }
 
@@ -68,14 +104,13 @@ function  getchartdata(profid) {
 
             latest_scores = downloaded_latest_scores;
             latest_semesters = downloaded_latest_semesters;
-
             // document.getElementById("professor_chart").style.bgcolor = "white"; 
 
             var imag1 = "<img "
-                    + "src='" + "" + "images/st.gif" + "'/>";
-           document.getElementById("professor_chart").innerHTML = "";
-           tablecontents = "";
-           // var tablecontents = "j";
+                + "src='" + "" + "images/st.gif" + "'/>";
+            //document.getElementById("professor_chart").innerHTML = "";
+            tablecontents = "";
+            // var tablecontents = "j";
             tablecontents = "<table id=\"ratetableid\">";
             for (var row = 0; row < maxNumOfStars + 1/* add one for semester description */; row++)
             {
@@ -105,10 +140,8 @@ function  getchartdata(profid) {
             //tablecontents += profid;
             document.getElementById("professor_chart").innerHTML = tablecontents;
         }
-       
-    });
 
-   
+    });
 }
 /* end of code - get the chart details */
 function getprofiledata(profid) {
@@ -123,40 +156,215 @@ function getprofiledata(profid) {
         data: 'prof_id=' + profid,
         success: function(data)
         {
-           // alert(data);
+            //alert(data);
             //	var profdata = "<div>"+val.profname +"<br/>"+ val.profdetails+"</div>";
             //	alert(profdata);
             // remove  [ ]
             var obj = jQuery.parseJSON(data.substring(1, data.length - 1));
-            var profdata = "<div>" + obj.profname + "<br/><b>" + obj.profdepartment + "</b><br/>" + obj.profdetails + "<br/><br/><br/><br/></div>";
-           // alert(profdata);
+            var profdata = "<div class='right_name_prof'>" + obj.profname + "<br/><b>" + obj.profdepartment + "</b><br/>" + obj.profdetails + "<br/><br/><br/><br/></div>";
+            var profimg = "<div class='left_prof_img'><img class='img-radius'"
+                + "src='" + "data:image/jpg;base64,"
+                + obj.profimage + "'/></div>";
+// alert(profdata);
             //var b = eval(data)[0];
             //alert(b.profname);
             var profname = "<div> Professor Name : &nbsp" + obj.profname + "</div>";
             //$(profname).appendTo("#prof_n");
             $(profdata).appendTo("#prof_exp");
+            $(profimg).appendTo("#prof_exp");
+            $(profname).appendTo("#prof_name_st");
         }
 
     }); // Ajax Call
 
     /* end of code */
 }
-
 function getProfileChart(prfidglobal) {
-  //  $( "#prof_exp" ).remove();
-     // 
-    
+//  $( "#prof_exp" ).remove();
+    document.getElementById("professor_comments").innerHTML = "";
+    document.getElementById("prof_name_st").innerHTML = "";
     document.getElementById("prof_exp").innerHTML = "";
-     //document.getElementById("professor_chart").innerHTML = "";
-    var profid = prfidglobal;    
+    document.getElementById("professor_chart").innerHTML = "";
+    // document.getElementById("professor_comments").innerHTML = "";
+    //document.getElementById("professor_chart").innerHTML = "";
+    professor_ID = prfidglobal;
+    var profid = prfidglobal;
     getprofiledata(profid);
-  // $( "#professor_chart" ).remove();
     getchartdata(profid);
+    // $( "#professor_chart" ).remove();
     $("#home").hide();
     $("#profile").hide();
     $("#rating").show();
     $("#forum").hide();
     $("#Contact").hide();
+    getcoursedata(profid);
+    getcomments(profid);
+}
+/***********Getting course number on page load **************************/
+function getcoursedata(profid) {
+    var pid = profid;
+    $("#givefeedback").click(function(e) {
+        e.preventDefault();
+        var $select = $('#course_combo');
+        $select.html('');
+        // alert("from button:" + pid);
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8888/phpfiles/profilepagecoursenumber.php",
+            data: 'prof_id=' + pid,
+            success: function(data)
+            {
+                var tmp = data.substring(1, data.length - 1);
+                //alert(tmp);
+                var tmp2 = tmp.replace(/},{/g, '} DELIMIT {');
+                //alert(tmp2);
+                var tmp3 = tmp2.split(" DELIMIT ");
+                //alert(tmp3);
+                for (var i in tmp3) {
+                    var obj = jQuery.parseJSON(tmp3[i]);
+                    document.getElementById('course_combo').innerHTML += '<option value="' + obj.cnumber + '">' + obj.cnumber + '</option>';
+                }
+            }
+        });
+    });
+}
+
+/* Code getting course name for professor */
+var coursecontent = "";
+function set() {
+
+    var firstDropVal = $('#course_combo').val();
+    // alert("before selection:" + firstDropVal);
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8888/phpfiles/profpagecoursename.php",
+        data: 'c_number=' + firstDropVal,
+        success: function(data)
+        {
+            //alert(data);
+            var obj_cnumber = jQuery.parseJSON(data.substring(1, data.length - 1));
+            var coursename_text = obj_cnumber.cname;
+            //alert(coursename_text);
+            var object = document.getElementById('course_textbox');
+            object.value = coursename_text;
+            // document.getElementById("course_textbox").innerHTML = coursename_text;
+
+        }
+    });
+}
+
+/* ending of Code - to laod the course name in test box */
+
+/*********************************************/
+
+/************Starting of code =- for getting comments*******************/
+function getcomments(profid) {
+// alert("Starting of code. For filling comment area");	
+    var p_id = profid;
+    //alert(p_id);
+
+    $.ajax({
+        url: "http://localhost:8888/phpfiles/profpagecomments.php",
+        type: "get",
+        data: 'prof_id=' + p_id,
+        success: function(data) {
+            //alert(data);
+            //alert("from commetns area");
+            var maindata = data.substring(1, data.length - 1);
+            //alert(tmp);
+            var seperator = maindata.replace(/},{/g, '} DELIMIT {');
+            var finalop = seperator.split(" DELIMIT ");
+            //alert(finalop);
+            for (var i in finalop)
+            {
+                // alert(finalop[i]);
+                var obj = jQuery.parseJSON(finalop[i]);
+                var todo_str = "No Data Loaded";
+                var comment_data =
+                    "<div class='left_comments'>" +
+                    obj.user + "</div><div class='right_comments'>@" + obj.time +
+                    "</div><div><textarea rows=\"2\" cols=\"100\" readonly>" +
+                    obj.comment +
+                    "</textarea>" +
+                    "</div><br>";
+                $(comment_data).appendTo("#professor_comments");
+            }
+        },
+        error: function() {
+            alert("failure");
+            //$(".content3").css("display", "none");
+        }
+    });
+    /* ending  of code - To fill the comment area */
 
 }
-	
+/************Ending of code =- for getting comments*******************/
+/****** Starting of code - calling post comment function***********/
+$(function() {
+    $("#post_rating").click(function(e) {
+        var p_id = professor_ID;
+        postmycomment(p_id);
+    });
+});
+/*********************end code******************/
+/******************starting of code - posting comment to database******************************/
+
+function postmycomment(p_id) {
+
+    //alert(prfidglobal);
+    alert("Professoir ID from cliek:" + p_id);
+    var pro_id = p_id;
+    //alert(pro_id);
+    // var stu_id = studentID;
+    var stu_id = 3;
+    //alert("Now Showing studnet ID");
+    //alert(stu_id);
+
+    //$("#result").html('');
+    //var values = $("#form").serialize();
+    var e = document.getElementById("semdetails");
+    var semester = e.options[e.selectedIndex].text;
+    var f = document.getElementById("course_combo");
+    var course_id = f.options[f.selectedIndex].text;
+    var course_name = document.getElementById("course_textbox").value;
+    //alert(course_name);
+    var g = document.getElementById("qu1");
+    var q_01 = g.options[g.selectedIndex].value;
+    //alert(q_01);
+    var h = document.getElementById("qu2");
+    var q_02 = h.options[h.selectedIndex].value;
+    var k = document.getElementById("qu3");
+    var q_03 = k.options[k.selectedIndex].value;
+    var p = document.getElementById("qu4");
+    var q_04 = p.options[p.selectedIndex].value;
+    var comments_area = document.getElementById("carea").value;
+    //alert(comments_area);
+
+    var datastring = {semester: semester, course_id: course_id, course_name: course_name, q_01: q_01, q_02: q_02, q_03: q_03, q_04: q_04, comments_area: comments_area, pro_id: pro_id, stu_id: stu_id};
+    //alert(datastring);
+    if (semester != "" && course_id != "" && course_name != "" && q_01 != "" && q_02 != "" && q_03 != "" && q_04 != "" && comments_area != "")
+    {
+        /* to chec if any box is empty or not */
+        $.ajax({
+            url: "http://localhost:8888/phpfiles/postdata.php",
+            type: "post",
+            data: datastring,
+            success: function(data) {
+                alert(data);
+                $("#afterpost").html('Submitted successfully');
+            },
+            error: function() {
+                alert("failure");
+                $("#afterpost").html('There is error while submit');
+            }
+        });
+    }
+    else
+    {
+        alert("You are missing any filed..!!");
+    }
+}
+
+
+
+/****************Ending of code - posting comment to database*************************/

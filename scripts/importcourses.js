@@ -56,7 +56,6 @@ function getPosts(c) {
 }
 
 function viewComments(pid) {
-    alert(pid);
     document.getElementById("courses-div").innerHTML = "";
     document.getElementById("course-details-div").innerHTML = "";
     document.getElementById("comments-details-div").innerHTML = "";
