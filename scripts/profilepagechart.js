@@ -29,7 +29,7 @@
 			                {
 			                	
 			                	var tmp = data.substring(1,data.length-1);
-			                	//alert(tmp);
+			                	alert(tmp);
 			                	var tmp2 = tmp.replace(/},{/g,'} DELIMIT {');
 			                	
 			                	var tmp3 = tmp2.split(" DELIMIT ");

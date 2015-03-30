@@ -30,7 +30,7 @@ $(function() {
                         //alert(obj.p);
                         sessionStorage.setItem("username", obj.u);
                         
-                        var test = sessionStorage.getItem("username");
+                        var username = sessionStorage.getItem("username");
                         //alert(test);
                         //sessionStorage.setItem("username", "");
 		        //$(tblRow).appendTo("#profile"); 

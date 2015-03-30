@@ -270,7 +270,7 @@ INSERT INTO `Student_master` (`st_id`, `st_fname`, `st_lname`, `st_emailid`, `st
 (1, 'Harshil Patel', '', 'abc@gmail.com', 'harshil123', 'Fall 2014', 'h123456'),
 (2, 'Hari', '', 'ch@yahoo.com', 'hari123', 'spring 2014', 'harikrishna'),
 (3, 'Maunika', '', 'm@gmail.com', 'm1234', '2014 Summer', 'mformaster'),
-(4, 'Chuchi', '', 'ch@yahoo.com', 'chuchi123', 'spring 2014', 'chuchi'),
+(4, 'Keerthy', 'Inumarthy', 'ki@yahoo.com', 'keerthy123', 'fall 2013', 'keerthy'),
 (5, 'Adi', 'gh', 'adi@gmail.com', 'adi123', '2013 Fall', 'a4adi'),
 (6, 'maik', 'martin', 'mi@gmail.com', 'mike123', '2013 Fall', 'mike123'),
 (7, 'Michael', 'w', 'm@yahoo.com', 'm1234', '2013 Fall', 'michael'),
@@ -371,10 +371,16 @@ INSERT INTO posts_master (st_id, course, description, status, datePosted)
 VALUES(2,'CS480','Difference between interface and pure abstract class?','Active', now());
 
 INSERT INTO posts_master (st_id, course, description, status, datePosted) 
-VALUES(2,'CS464','How to reverse a String in C language?','Active', now());
+VALUES(2,'CS580','How to reverse a String in C language?','Active', now());
 
 INSERT INTO posts_master (st_id, course, description, status, datePosted) 
-VALUES(1,'CS526','How to integrate reCAPTCHA in an application?','Active', now());
+VALUES(4,'CS457','What is relational database?','Active', now());
+
+INSERT INTO posts_master (st_id, course, description, status, datePosted) 
+VALUES(4,'CS557','Is this course tough?','Active', now());
+
+INSERT INTO posts_master (st_id, course, description, status, datePosted) 
+VALUES(4,'CS547','What is taught in this course?','Active', now());
 
 INSERT INTO replies_master (st_id, postID, content, status, dateReplied)
 VALUES(2, 1, 'Easiest way is to follow below: 
