@@ -227,8 +227,9 @@ function getprofiledata(profid) {
                 + obj.profimage + "'/></div>";
 // alert(profdata);
             //var b = eval(data)[0];
-            //alert(b.profname);
+            //alert(obj.profdata);
             var profname = "<div> Professor Name : &nbsp" + obj.profname + "</div>";
+            //alert(obj.profname);
             //$(profname).appendTo("#prof_n");
             $(profdata).appendTo("#prof_exp");
             $(profimg).appendTo("#prof_exp");
