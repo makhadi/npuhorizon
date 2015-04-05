@@ -1,4 +1,4 @@
-/*
+/* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -47,12 +47,38 @@ $(document).ready(function() {
         $.each(data, function(i, f) {
             var temp_pid = f.profid;
             var tq = getratingdata(temp_pid);
-            var pdata = "<div class='right_name_prof'><tr><td><A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</div>";
-            var pimg = "<table class='left_prof_img'><tr><td><img class='img-radius'"
-                + "src='" + "data:image/jpg;base64,"
-                + f.image + "'/></td></tr></table>";
-            $(pdata).appendTo("#profile_prof");
-            $(pimg).appendTo("#profile_prof");
+            if (tq >= 3.5)
+            {
+                var pdata = "<div class='right_name_prof'><tr><td><A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</div>"
+                    + "<div class='right_smily'><h2>" + tq + "/5 &nbsp <img src='images/smily1.png'/></h2></div>";
+                var pimg = "<table class='left_prof_img1'><tr><td><img class='img-radius'"
+                    + "src='" + "data:image/jpg;base64,"
+                    + f.image + "'/></td></tr></table>";
+                $(pdata).appendTo("#profile_prof");
+                $(pimg).appendTo("#profile_prof");
+            }
+            else if (tq <= 3.5 && tq >= 2)
+            {
+                var pdata = "<div class='right_name_prof'><tr><td><A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</div>"
+                    + "<div class='right_smily'><h2>" + tq + "/5 &nbsp <img src='images/smily2.png'/></h2></div>";
+                var pimg = "<table class='left_prof_img1'><tr><td><img class='img-radius'"
+                    + "src='" + "data:image/jpg;base64,"
+                    + f.image + "'/></td></tr></table>";
+                $(pdata).appendTo("#profile_prof");
+                $(pimg).appendTo("#profile_prof");
+            }
+            else if (tq <= 2)
+            {
+                var pdata = "<div class='right_name_prof'><tr><td><A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</div>"
+                    + "<div class='right_smily'><h2>" + tq + "/5 &nbsp <img src='images/smily3.png'/></h2></div>";
+                var pimg = "<table class='left_prof_img1'><tr><td><img class='img-radius'"
+                    + "src='" + "data:image/jpg;base64,"
+                    + f.image + "'/></td></tr></table>";
+                $(pdata).appendTo("#profile_prof");
+                $(pimg).appendTo("#profile_prof");
+            }
+
+
 
         });
     });
@@ -77,14 +103,14 @@ function getratingdata(tpid) {
                 var obj = jQuery.parseJSON(tmp3[i]);
                 //r_knowledge":"40","r_teaching":"37","r_material":"29","r_recommend":"35"
                 var total_students = obj.number_of_student;
-                var rating_knowledge = obj.r_knowledge/total_students;
-                var rating_teaching = obj.r_teaching/total_students;
-                var rating_material = obj.r_material/total_students;
-                var rating_recommend = obj.r_recommend/total_students;
+                var rating_knowledge = obj.r_knowledge / total_students;
+                var rating_teaching = obj.r_teaching / total_students;
+                var rating_material = obj.r_material / total_students;
+                var rating_recommend = obj.r_recommend / total_students;
 
-                overall_quality = (rating_knowledge + rating_teaching + rating_material + rating_recommend)/4;
-                overall_quality = Math.round( overall_quality * 10 ) / 10;
-                //alert("Overall Quality:"+overall_quality);
+                overall_quality = (rating_knowledge + rating_teaching + rating_material + rating_recommend) / 4;
+                overall_quality = Math.round(overall_quality * 10) / 10;
+                //alert("Overall Quality:"+overall_quality);               
             }
         },
         async: false
@@ -99,7 +125,7 @@ var latest_scores = [];
 var latest_semesters = [];
 var total_samples = 0;
 var course_num = 0;
-//var prfidglobal = sessionStorage.getItem("profid");
+//var prfidglobal = sessionStorage.getItem("profid");				
 var downloaded_latest_scores = [];
 var downloaded_latest_semesters = [];
 var usernamedb = 0;
@@ -138,7 +164,7 @@ function  getchartdata(profid) {
 
             latest_scores = downloaded_latest_scores;
             latest_semesters = downloaded_latest_semesters;
-            // document.getElementById("professor_chart").style.bgcolor = "white";
+            // document.getElementById("professor_chart").style.bgcolor = "white"; 
 
             var imag1 = "<img "
                 + "src='" + "" + "images/st.gif" + "'/>";
@@ -195,7 +221,7 @@ function getprofiledata(profid) {
             //	alert(profdata);
             // remove  [ ]
             var obj = jQuery.parseJSON(data.substring(1, data.length - 1));
-            var profdata = "<div class='right_name_prof'>" + obj.profname + "<br/><b>" + obj.profdepartment + "</b><br/>" + obj.profdetails + "<br/><br/><br/><br/></div>";
+            var profdata = "<div class='right_name_prof1'>" + obj.profname + "<br/><b>" + obj.profdepartment + "</b><br/>" + obj.profdetails + "<br/><br/><br/><br/></div>";
             var profimg = "<div class='left_prof_img'><img class='img-radius'"
                 + "src='" + "data:image/jpg;base64,"
                 + obj.profimage + "'/></div>";
@@ -293,7 +319,7 @@ function set() {
 
 /************Starting of code =- for getting comments*******************/
 function getcomments(profid) {
-// alert("Starting of code. For filling comment area");
+// alert("Starting of code. For filling comment area");	
     var p_id = profid;
     //alert(p_id);
 
