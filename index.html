@@ -11,15 +11,13 @@ and open the template in the editor.
     <title>Welcome to NPU e-Horizon</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="css/indexpage.css">
     <!-- <link href="css/model.css" rel="stylesheet" type="text/css"/> -->
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
 
-
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+    <script src="scripts/banner_rotate.js" type="text/javascript"></script>
     <script src="scripts/jquery.cycle2.min.js" type="text/javascript"></script>
 
     <script src="scripts/indexpage.js" type="text/javascript"></script>
@@ -34,6 +32,7 @@ and open the template in the editor.
     <script src="scripts/jquery.leanModal.min.js" type="text/javascript"></script>
 
     <script src="scripts/jquery.validate.min.js" type="text/javascript"></script>
+
     <script language='javascript'>
         function showComments(i) {
             alert("hi");
@@ -77,13 +76,26 @@ and open the template in the editor.
         </div>
         <div class="f-border">
             <article class="f-border f-backside f-color a-width">
-                <div id="home"> <h2 id="wso">Home</h2>
-                    <ul id="js-news" class="js-hidden">
-                        <li class="news-item"><a href="#">This is the 1st latest news item.</a></li>
-                        <li class="news-item"><a href="#">This is the 2nd latest news item.</a></li>
-                        <li class="news-item"><a href="#">This is the 3rd latest news item.</a></li>
-                        <li class="news-item"><a href="#">This is the 4th latest news item.</a></li>
-                    </ul>
+                <div id="home"> <div class="news_left_title"><h3>Important Announcement:</h3></div>
+                    <div class="news_right_data back_news_slider img-radius" id="newsslide">
+                        <ul id="NewsSlider">
+
+                        </ul>
+                    </div>
+
+                    <div class="left_banner_img">
+                        <ul id="exampleSlider">
+                            <li><img class="banner_shape" src="images/banner_1.jpg" alt=""/></li>
+                            <li><img class="banner_shape" src="images/banner_2.jpg" alt=""/></li>
+                            <li><img class="banner_shape" src="images/banner_3.jpg" alt=""/></li>
+                            <li><img class="banner_shape" src="images/banner_4.jpg" alt=""/></li>
+                            <li><img class="banner_shape" src="images/banner_5.jpg" alt=""/></li>
+                        </ul>
+                    </div>
+                    <div class="right_banner_dec">
+                        <h2 id="wso" class="title_heading">Welcome To NPU e-Horizen</h2>
+                        Hi This is welcome page. welcome script is going to be here.
+                    </div>
                     <br>
                 </div>
                 <div id="profile">

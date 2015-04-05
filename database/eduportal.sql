@@ -229,6 +229,31 @@ CREATE TABLE IF NOT EXISTS `eduportal`.`replies_master` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `NewsMaster`
+--
+
+CREATE TABLE IF NOT EXISTS `NewsMaster` (
+  `nid` int(11) NOT NULL AUTO_INCREMENT,
+  `ndetails` varchar(500) NOT NULL,
+  PRIMARY KEY (`nid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `NewsMaster`
+--
+
+INSERT INTO `NewsMaster` (`nid`, `ndetails`) VALUES
+(3, 'NPU-Cultural fest is coming up. Grearsss up for fun.'),
+(4, 'NPU - Campus event. Job fair is coming up. Be ready with your updated resume.'),
+(5, 'NPU - Campus visit event. Be ready for get professional exposure. Get participate in INTEL campus visit.'),
+(6, 'Be ready for registration. Be on time for fees payment and registration to avoid late charges.'),
+(7, 'Student contact to the admin department who are participating in upcoming graduation event. Crown pickup date is changes.');
+
+
 --
 -- Dumping data for table `Dept_master`
 --

@@ -1,11 +1,11 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -23,11 +23,13 @@ $(document).ready(function() {
     //alertvhjbj ("test");
     $("#loginmodal").hide();
     $("#signupmodel").hide();
+    $("#feedbackmodel").hide();
     $(function() {
         $('#loginform').submit(function(e) {
             return false;
             $("#loginmodal").show();
             $("#signupmodel").hide();
+            $("#feedbackmodel").hide();
         });
 
         $('#modaltrigger').leanModal({closeButton: ".hidemodal"});
@@ -37,6 +39,7 @@ $(document).ready(function() {
             return false;
             $("#loginmodal").hide();
             $("#signupmodel").show();
+            $("#feedbackmodel").hide();
         });
 
         $('#createaccount').leanModal({closeButton: ".hidemodal"});
@@ -46,9 +49,20 @@ $(document).ready(function() {
             return false;
             $("#loginmodal").hide();
             $("#signupmodel").show();
+            $("#feedbackmodel").hide();
         });
 
         $('#signuplink').leanModal({closeButton: ".hidemodal"});
+    });
+    $(function() {
+        $('#feddbackform').submit(function(e) {
+            return false;
+            $("#loginmodal").hide();
+            $("#signupmodel").hide();
+            $("#feedbackmodel").show();
+        });
+
+        $('#givefeedback').leanModal({closeButton: ".hidemodal"});
     });
     $("#login_link").click(function() {
         $("#home").hide();
@@ -115,13 +129,11 @@ $(document).ready(function() {
         $("#Contact").hide();
     });
     $("#c").click(function() {
-        //var prfidglobal = sessionStorage.getItem("profid");
         $("#home").hide();
         $("#profile").hide();
         $("#rating").show();
         $("#forum").hide();
         $("#Contact").hide();
-        //getProfileChart(prfidglobal);
     });
     $("#d").click(function() {
         $("#home").hide();
@@ -138,4 +150,3 @@ $(document).ready(function() {
         $("#Contact").show();
     });
 });
-       

@@ -3,7 +3,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : Feb 22, 2015, 12:11:12 PM
     Author     : Harshil Patel
 */
@@ -355,10 +355,14 @@ img.ri
 }
 .right_name_prof{
     float: right;
-    width:70%;
-    margin-right: 9%;
-    margin-top: 3.5%;
+    width:40%;
+    margin-right: 35%;
+    margin-top: 3%;
     margin-bottom: 3.5%;
+}
+.right_smily{
+    float: right;
+    width:20%;
 }
 .left_prof_img{
     float: left;
@@ -396,3 +400,56 @@ img.ri
     padding-left: 10px;
     border-radius: 20px;
 }
+
+.left_banner_img{
+    float: left;
+    width:30%;
+
+}
+.right_banner_dec{
+    float: right;
+    width:70%;
+}
+.banner_shape{
+    padding-top: 10%;
+    border-radius: 5px;
+    padding-bottom: 5%;
+}
+#exampleSlider {overflow: hidden; list-style: none; padding: 0; margin: 0;}
+#NewsSlider {overflow: hidden; list-style: none; padding: 0; margin: 0;}
+.title_heading{
+    margin-left: 18%;
+}
+.news_left_title{
+    margin-top: 3%;
+    float: left;
+    width:30%;
+    margin-bottom: 3%;
+    color: white;
+}
+.news_right_data{
+    margin-top: 3%;
+    float: right;
+    width:65%;
+    margin-bottom: 3%;
+    color:#FFF;
+    margin-right: 2%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: blueviolet;
+
+}
+.img_resize{
+    height:2%;
+}
+.back_news_slider{
+    background-color: rgba(200, 200, 200, 0.59);
+}
+.news_margin{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+
+

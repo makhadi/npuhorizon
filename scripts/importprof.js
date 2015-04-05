@@ -1,71 +1,105 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-/*
- $(document).ready(function() {
- var people = [];
- //alert("hiii");
- //$.getJSON('http://localhost:8888/phpfiles/backup_homepageprofdata.php', function(data){
- $.getJSON('http://192.168.0.25/backup_homepageprofdata.php', function(data) {
- $.each(data, function(i, f) {
- var tblRow = "<p class='rating_profile_left'>" + "<img class='img-radius'"
- + "src='" + "data:image/jpg;base64,"
- + f.image + "'/>" + "</p><br>" +
- //+ f.image + "'/>" + "</td>" +
- //"<td> <A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> </td>" + "<td>" + f.department + "</td>" + "<td> <a href='mailto:" + f.email + "'>" + f.email + "</a></td>" + "</tr>"
- " <p class='rating_profile_right'> <A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</p>"
 
- // $(tblRow).appendTo("#profile"); profile_prof
- $(tblRow).appendTo("#profile_prof");
- });
- });
-
- }); */
 
 $(document).ready(function() {
 
-    /******************Starting of code : Code for new slider*****************/
-    $(function() {
-        $('#js-news').ticker({
-            speed: 0.10,
-            htmlFeed: false,
-            fadeInSpeed: 600,
-            titleText: 'Latest News'
+
+    /************ code to get news data for slider**********************/
+    $.getJSON('http://localhost:8888/phpfiles/homepagenewsdata.php', function(data) {
+        $.each(data, function(i, f) {
+            var newsData = "<li><h4 class='news_margin'>" + f.news_details + "</h4></li>";
+            $(newsData).appendTo("#NewsSlider");
         });
+        var change_img_time = 5000;
+        var transition_speed = 500;
+
+        var simple_slideshow = $("#NewsSlider"),
+            listItems = simple_slideshow.children('li'),
+            listLen = listItems.length,
+            i = 0,
+            changeList = function() {
+
+                listItems.eq(i).fadeOut(transition_speed, function() {
+                    i += 1;
+                    if (i === listLen) {
+                        i = 0;
+                    }
+                    listItems.eq(i).fadeIn(transition_speed);
+                });
+
+            };
+
+        listItems.not(':first').hide();
+        setInterval(changeList, change_img_time);
     });
-    /******************End of code : Code for new slider*****************/
+    /**************end of code ***************************************/
+
     var people = [];
     //alert("hiii");
     //$.getJSON('http://localhost:8888/phpfiles/backup_homepageprofdata.php', function(data){
     $.getJSON('http://localhost:8888/phpfiles/backup_homepageprofdata.php', function(data) {
-        $.each(data, function(i, f) {
-            /*  var tblRow = "<div class='rating_profile_left'>" + "<img class='img-radius'"
-             + "src='" + "data:image/jpg;base64,"
-             + f.image + "'/>" + "</div>" +
-             //+ f.image + "'/>" + "</td>" +
-             //"<td> <A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> </td>" + "<td>" + f.department + "</td>" + "<td> <a href='mailto:" + f.email + "'>" + f.email + "</a></td>" + "</tr>"
-             " <div class='rating_profile_right'> <A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</div><br><br>"
 
-             // $(tblRow).appendTo("#profile"); profile_prof */
+        $.each(data, function(i, f) {
+            var temp_pid = f.profid;
+            var tq = getratingdata(temp_pid);
             var pdata = "<div class='right_name_prof'><tr><td><A href='#' onclick='getProfileChart(" + f.profid + ")'>" + f.p_name + " </A> " + "<br>" + " <a href='mailto:" + f.email + "'>" + f.email + "</a><br>" + f.department + "</div>";
             var pimg = "<table class='left_prof_img'><tr><td><img class='img-radius'"
                 + "src='" + "data:image/jpg;base64,"
                 + f.image + "'/></td></tr></table>";
-            // $(tblRow).appendTo("#profile_prof");
             $(pdata).appendTo("#profile_prof");
             $(pimg).appendTo("#profile_prof");
+
         });
     });
 });
+/****** Code to get the over all value of professor rating********/
+var tpid;
+function getratingdata(tpid) {
+    var overall_quality = 0;
+    // alert("from rating function"+tpid);
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8888/phpfiles/getoverallrating.php",
+        data: 'prof_id=' + tpid,
+        success: function(data)
+        {
+            var tmp = data.substring(1, data.length - 1);
+            //alert(tmp);
+            var tmp2 = tmp.replace(/},{/g, '} DELIMIT {');
+            var tmp3 = tmp2.split(" DELIMIT ");
+
+            for (var i in tmp3) {
+                var obj = jQuery.parseJSON(tmp3[i]);
+                //r_knowledge":"40","r_teaching":"37","r_material":"29","r_recommend":"35"
+                var total_students = obj.number_of_student;
+                var rating_knowledge = obj.r_knowledge/total_students;
+                var rating_teaching = obj.r_teaching/total_students;
+                var rating_material = obj.r_material/total_students;
+                var rating_recommend = obj.r_recommend/total_students;
+
+                overall_quality = (rating_knowledge + rating_teaching + rating_material + rating_recommend)/4;
+                overall_quality = Math.round( overall_quality * 10 ) / 10;
+                //alert("Overall Quality:"+overall_quality);
+            }
+        },
+        async: false
+    });
+    return overall_quality;
+}
+
+/****** end of code **************************************************/
+
 var maxNumOfStars = 5;
 var latest_scores = [];
 var latest_semesters = [];
 var total_samples = 0;
 var course_num = 0;
-//var prfidglobal = sessionStorage.getItem("profid");				
+//var prfidglobal = sessionStorage.getItem("profid");
 var downloaded_latest_scores = [];
 var downloaded_latest_semesters = [];
 var usernamedb = 0;
@@ -104,7 +138,7 @@ function  getchartdata(profid) {
 
             latest_scores = downloaded_latest_scores;
             latest_semesters = downloaded_latest_semesters;
-            // document.getElementById("professor_chart").style.bgcolor = "white"; 
+            // document.getElementById("professor_chart").style.bgcolor = "white";
 
             var imag1 = "<img "
                 + "src='" + "" + "images/st.gif" + "'/>";
@@ -259,7 +293,7 @@ function set() {
 
 /************Starting of code =- for getting comments*******************/
 function getcomments(profid) {
-// alert("Starting of code. For filling comment area");	
+// alert("Starting of code. For filling comment area");
     var p_id = profid;
     //alert(p_id);
 
